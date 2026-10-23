@@ -154,22 +154,30 @@
   </section>
 
   <section class="proof" aria-label="Números do Explica Mais">
-    <div class="container proof__row">
-      <p class="proof__title" aria-hidden="true">Boletim</p>
-      <div class="proof__item reveal">
-        <span class="proof__key">Nota no Google</span>
-        <span class="proof__big"><span data-count="5" data-decimals="1" data-sep=",">0,0</span></span>
-        <span class="proof__label">no Google, em <span data-count="28">0</span> avaliações</span>
-      </div>
-      <div class="proof__item reveal" style="--d: 1">
-        <span class="proof__key">Alunos por aula</span>
-        <span class="proof__big">1 para 1</span>
-        <span class="proof__label">toda aula é individual, sem turma</span>
-      </div>
-      <div class="proof__item reveal" style="--d: 2">
-        <span class="proof__key">Séries</span>
-        <span class="proof__big">6º ao 3º</span>
-        <span class="proof__label">do fundamental ao vestibular, todas as disciplinas</span>
+    <div class="container">
+      <div class="notebook reveal" data-notebook>
+        <div class="notebook__tabs" role="tablist" aria-label="Páginas do caderno">
+          <button class="notebook__tab notebook__tab--purple" role="tab" id="nb-tab-nota" aria-selected="true" aria-controls="nb-nota" type="button">Nota</button>
+          <button class="notebook__tab notebook__tab--yellow" role="tab" id="nb-tab-aulas" aria-selected="false" aria-controls="nb-aulas" tabindex="-1" type="button">Aulas</button>
+          <button class="notebook__tab notebook__tab--blue" role="tab" id="nb-tab-series" aria-selected="false" aria-controls="nb-series" tabindex="-1" type="button">Séries</button>
+        </div>
+        <div class="notebook__pages">
+          <article class="notebook__page is-active" id="nb-nota" role="tabpanel" aria-labelledby="nb-tab-nota">
+            <p class="notebook__kicker">No Google</p>
+            <p class="notebook__big"><span data-count="5" data-decimals="1" data-sep=",">0,0</span></p>
+            <p class="notebook__text">Em <strong><span data-count="28">0</span> avaliações</strong> públicas, todas com cinco estrelas, escritas por pais, tios e alunos. É só procurar Explica Mais no Google.</p>
+          </article>
+          <article class="notebook__page" id="nb-aulas" role="tabpanel" aria-labelledby="nb-tab-aulas" hidden>
+            <p class="notebook__kicker">Em cada aula</p>
+            <p class="notebook__big">1 para 1</p>
+            <p class="notebook__text"><strong>Um professor, um aluno.</strong> Sem turma, com horário fixo combinado com a família e retorno depois de cada aula sobre o que avançou.</p>
+          </article>
+          <article class="notebook__page" id="nb-series" role="tabpanel" aria-labelledby="nb-tab-series" hidden>
+            <p class="notebook__kicker">Para quem</p>
+            <p class="notebook__big">6º ao 3º</p>
+            <p class="notebook__text"><strong>Do fundamental ao vestibular,</strong> em todas as disciplinas. Matemática, física, química e português são as mais procuradas. Redação com correção comentada.</p>
+          </article>
+        </div>
       </div>
     </div>
   </section>
@@ -395,10 +403,14 @@
 <footer class="footer">
   <div class="container">
     <div class="footer__top">
-      <a class="brand brand--footer" href="#topo" aria-label="Explica Mais, voltar ao início">
-        <img class="brand__img" src="assets/logo/marca-3d.webp" alt="" width="174" height="144" loading="lazy" decoding="async">
-        <span class="brand__word">explica<span class="brand__plus">mais</span></span>
-      </a>
+      <div class="footer__brandrow">
+        <a class="brand brand--footer" href="#topo" aria-label="Explica Mais, voltar ao início">
+          <img class="brand__img" src="assets/logo/marca-3d.webp" alt="" width="174" height="144" loading="lazy" decoding="async">
+          <span class="brand__word">explica<span class="brand__plus">mais</span></span>
+        </a>
+        <!-- TODO: link direto para avaliar na ficha do Google -->
+        <a class="footer__pill footer__pill--rate" href="#" target="_blank" rel="noopener"><i class="ph-fill ph-star" aria-hidden="true"></i>Avalie no Google</a>
+      </div>
       <p class="footer__chalk">Até a próxima aula.</p>
     </div>
     <div class="footer__body">
@@ -413,12 +425,11 @@
         </div>
       </div>
       <div class="footer__links">
-        <a class="footer__pill" href="tel:+5567991237220"><i class="ph-fill ph-phone" aria-hidden="true"></i>(67) 99123-7220</a>
+        <a class="footer__pill" href="https://wa.me/5567991237220?text=Oi%2C%20quero%20falar%20com%20o%20Explica%20Mais" target="_blank" rel="noopener"><i class="ph-fill ph-whatsapp-logo" aria-hidden="true"></i>Contato</a>
         <a class="footer__pill" href="https://www.instagram.com/explicamaiscg/" target="_blank" rel="noopener"><i class="ph-fill ph-instagram-logo" aria-hidden="true"></i>@explicamaiscg</a>
-        <a class="footer__pill" href="#" target="_blank" rel="noopener"><i class="ph-fill ph-google-logo" aria-hidden="true"></i>Avaliações no Google</a>
       </div>
     </div>
-    <p class="footer__muted">Explica Mais, escola de reforço escolar individual. Feito em Campo Grande, MS.</p>
+    <p class="footer__muted">Explica Mais, escola de reforço escolar individual. <a href="tel:+5567991237220">(67) 99123-7220</a>. Feito em Campo Grande, MS.</p>
   </div>
 </footer>
 

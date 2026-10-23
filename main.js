@@ -222,6 +222,81 @@
     bar.classList.add("stickybar--hidden");
   }
 
+  /* Caderno: abas que folham a pagina, com simulacao automatica */
+  var notebook = document.querySelector("[data-notebook]");
+  if (notebook) {
+    var nbTabs = Array.prototype.slice.call(notebook.querySelectorAll('[role="tab"]'));
+    var nbPages = nbTabs.map(function (t) { return document.getElementById(t.getAttribute("aria-controls")); });
+    var nbPagesWrap = notebook.querySelector(".notebook__pages");
+    var nbIndex = 0;
+    var nbTimer = null;
+    var nbUserTook = false;
+
+    var nbShow = function (i, animate) {
+      if (i === nbIndex) return;
+      var cur = nbPages[nbIndex];
+      var next = nbPages[i];
+      if (animate && !reduceMotion && cur) {
+        var ghost = cur.cloneNode(true);
+        ghost.removeAttribute("id");
+        ghost.removeAttribute("role");
+        ghost.setAttribute("aria-hidden", "true");
+        ghost.classList.add("notebook__page--leave");
+        ghost.classList.remove("is-active");
+        ghost.querySelectorAll("[data-count]").forEach(function (el) { el.removeAttribute("data-count"); });
+        nbPagesWrap.appendChild(ghost);
+        ghost.addEventListener("animationend", function () { ghost.remove(); });
+      }
+      nbTabs.forEach(function (t, k) {
+        var on = k === i;
+        t.setAttribute("aria-selected", String(on));
+        t.setAttribute("tabindex", on ? "0" : "-1");
+        nbPages[k].hidden = !on;
+        nbPages[k].classList.toggle("is-active", on);
+      });
+      if (animate && !reduceMotion) {
+        next.classList.remove("notebook__page--enter");
+        void next.offsetWidth;
+        next.classList.add("notebook__page--enter");
+      }
+      nbIndex = i;
+    };
+
+    var nbStop = function () {
+      if (nbTimer) { clearInterval(nbTimer); nbTimer = null; }
+      notebook.classList.remove("notebook--auto");
+    };
+    var nbStart = function () {
+      if (reduceMotion || nbUserTook || nbTimer) return;
+      notebook.classList.add("notebook--auto");
+      nbTimer = setInterval(function () { nbShow((nbIndex + 1) % nbTabs.length, true); }, 6000);
+    };
+
+    nbTabs.forEach(function (tab, i) {
+      tab.addEventListener("click", function () { nbUserTook = true; nbStop(); nbShow(i, true); });
+      tab.addEventListener("keydown", function (e) {
+        var n = null;
+        if (e.key === "ArrowRight" || e.key === "ArrowDown") n = (i + 1) % nbTabs.length;
+        if (e.key === "ArrowLeft" || e.key === "ArrowUp") n = (i - 1 + nbTabs.length) % nbTabs.length;
+        if (n !== null) { e.preventDefault(); nbUserTook = true; nbStop(); nbShow(n, true); nbTabs[n].focus(); }
+      });
+    });
+    notebook.addEventListener("mouseenter", nbStop);
+    notebook.addEventListener("mouseleave", function () { if (!nbUserTook) { nbStart(); } });
+    notebook.addEventListener("focusin", nbStop);
+    notebook.addEventListener("pointerdown", function () { nbUserTook = true; nbStop(); });
+
+    /* so comeca a folhar quando o caderno aparece na tela */
+    if ("IntersectionObserver" in window) {
+      var nio = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) { if (entry.isIntersecting) nbStart(); else nbStop(); });
+      }, { threshold: 0.5 });
+      nio.observe(notebook);
+    } else {
+      nbStart();
+    }
+  }
+
   /* Aba atual no header */
   var navTabs = document.querySelectorAll(".tab[href^='#']");
   if (navTabs.length && "IntersectionObserver" in window) {

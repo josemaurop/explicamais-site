@@ -308,38 +308,110 @@ section { padding-block: var(--s-9); }
 }
 
 /* =========================================================
-   Prova
+   Prova: caderno com abas que folha a pagina
    ========================================================= */
 .proof { padding-block: 0; }
-.proof__row {
+.notebook {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--s-6);
-  padding-block: var(--s-6) var(--s-5);
+  grid-template-columns: 1fr 200px;
+  margin-block: var(--s-6) var(--s-4);
+  perspective: 1600px;
 }
-.proof__item {
-  display: flex;
-  flex-direction: column;
-  gap: var(--s-2);
-  padding: var(--s-5) var(--s-6);
-  border-radius: var(--r-card);
-  background: var(--purple-soft);
+.notebook__tabs { order: 2; }
+.notebook__pages {
+  display: grid;
+  position: relative;
+  background-color: var(--surface);
+  background-image:
+    linear-gradient(to right, transparent 56px, #E8799E 56px, #E8799E 58px, transparent 58px),
+    repeating-linear-gradient(to bottom, transparent 0 31px, var(--line) 31px 32px);
+  border-radius: var(--r-card) 0 0 var(--r-card);
   box-shadow: var(--shadow-card);
-  transform: rotate(-1.2deg);
+  transform-style: preserve-3d;
+  overflow: hidden;
 }
-.proof__item:nth-child(3) { background: var(--postit-yellow); transform: rotate(0.8deg); }
-.proof__item:nth-child(4) { background: var(--blue-soft); transform: rotate(-0.6deg); }
-.proof__big {
+.notebook__page {
+  grid-area: 1 / 1;
+  padding: var(--s-6) var(--s-7) var(--s-6) 88px;
+  min-height: 232px;
+  background: transparent;
+  backface-visibility: hidden;
+  transform-origin: left center;
+}
+.notebook__page[hidden] { display: none; }
+.notebook__page--leave {
+  display: block !important;
+  position: absolute;
+  inset: 0;
+  background-color: var(--surface);
+  background-image:
+    linear-gradient(to right, transparent 56px, #E8799E 56px, #E8799E 58px, transparent 58px),
+    repeating-linear-gradient(to bottom, transparent 0 31px, var(--line) 31px 32px);
+  box-shadow: 8px 0 24px rgba(23, 21, 58, 0.18);
+  animation: page-flip 520ms var(--ease-in-out) forwards;
+  pointer-events: none;
+  z-index: 2;
+}
+@keyframes page-flip {
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(-100deg); opacity: 0.6; }
+}
+.notebook__page--enter { animation: page-in 420ms var(--ease-out); }
+@keyframes page-in {
+  from { opacity: 0; transform: translateX(8px); }
+  to { opacity: 1; transform: none; }
+}
+.notebook__kicker { font-weight: 600; color: var(--text-muted); line-height: 32px; margin: 0; }
+.notebook__big {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(var(--t-2xl), 3.4vw, var(--t-3xl));
-  line-height: 1;
+  font-size: clamp(var(--t-3xl), 5vw, 4.25rem);
+  line-height: 64px;
   color: var(--purple);
   font-variant-numeric: tabular-nums;
+  margin: 0;
 }
-.proof__item:nth-child(3) .proof__big, .proof__item:nth-child(3) .proof__label { color: var(--postit-text); }
-.proof__label { color: var(--text-muted); max-width: 28ch; }
-.proof__key, .proof__title { display: none; }
+.notebook__text { line-height: 32px; color: var(--text-muted); max-width: 48ch; margin: 0; }
+.notebook__text strong { color: var(--text); font-weight: 600; }
+
+.notebook__tabs { display: flex; flex-direction: column; gap: var(--s-2); padding-top: var(--s-5); }
+.notebook__tab {
+  --tab: var(--purple);
+  position: relative;
+  min-height: 48px;
+  padding: 0 var(--s-5) 0 var(--s-4);
+  border: 0;
+  border-left: 4px solid var(--tab);
+  border-radius: 0 12px 12px 0;
+  background: var(--surface);
+  color: var(--text-muted);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--t-base);
+  text-align: left;
+  cursor: pointer;
+  overflow: hidden;
+  transition: background-color var(--dur-fast) ease, color var(--dur-fast) ease, transform var(--dur-fast) var(--ease-out);
+}
+.notebook__tab--purple { --tab: var(--purple); }
+.notebook__tab--yellow { --tab: var(--postit-yellow); }
+.notebook__tab--blue { --tab: var(--blue); }
+.notebook__tab[aria-selected="true"] { background: var(--bg); color: var(--text); transform: translateX(4px); box-shadow: var(--shadow-card); }
+.notebook__tab::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: 0;
+  height: 3px;
+  width: 100%;
+  background: var(--tab);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+.notebook--auto .notebook__tab[aria-selected="true"]::after { animation: tab-progress 6s linear forwards; }
+@keyframes tab-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@media (hover: hover) and (pointer: fine) {
+  .notebook__tab:hover { background: var(--bg); color: var(--text); }
+}
 
 /* =========================================================
    Como ajudamos: abas de situação
@@ -687,6 +759,8 @@ section { padding-block: var(--s-9); }
   padding-bottom: var(--s-6);
   border-bottom: 1px solid var(--ink-line);
 }
+.footer__brandrow { display: flex; align-items: center; gap: var(--s-5); }
+.footer__pill--rate .ph-fill { color: var(--postit-yellow); }
 .brand--footer .brand__img { height: 56px; }
 .brand--footer .brand__word { color: var(--chalk); font-size: var(--t-xl); }
 .brand--footer .brand__plus { color: var(--postit-yellow); }
@@ -721,6 +795,7 @@ section { padding-block: var(--s-9); }
   .footer__pill:hover { background: var(--ink-2); border-color: var(--chalk-muted); }
 }
 .footer__muted { margin-top: var(--s-6); font-size: var(--t-sm); color: var(--chalk-muted); }
+.footer__muted a { color: var(--chalk-muted); }
 
 /* =========================================================
    Barra fixa de WhatsApp (celular)
@@ -763,15 +838,16 @@ section { padding-block: var(--s-9); }
 
 @media (max-width: 767px) {
   section { padding-block: var(--s-8); }
-  .footer { padding-top: var(--s-7); padding-bottom: calc(var(--s-7) + 72px); }
-  .footer__top { flex-direction: column; align-items: flex-start; gap: var(--s-4); padding-bottom: var(--s-5); }
+  .footer { padding-top: var(--s-7); padding-bottom: calc(var(--s-5) + 72px); text-align: center; }
+  .footer__top { flex-direction: column; align-items: center; gap: var(--s-4); padding-bottom: var(--s-5); }
+  .footer__brandrow { flex-direction: column; gap: var(--s-3); }
   .brand--footer .brand__img { height: 44px; }
   .brand--footer .brand__word { font-size: var(--t-lg); }
   .footer__chalk { font-size: 1.6rem; }
-  .footer__body { grid-template-columns: 1fr; gap: var(--s-5); padding-top: var(--s-5); }
-  .footer__grid { gap: var(--s-4); max-width: none; }
+  .footer__body { grid-template-columns: 1fr; gap: var(--s-5); padding-top: var(--s-5); justify-items: center; }
+  .footer__grid { gap: var(--s-5); max-width: none; width: 100%; }
   .footer__col { font-size: var(--t-sm); line-height: 1.6; }
-  .footer__links { flex-direction: row; flex-wrap: wrap; }
+  .footer__links { flex-direction: row; flex-wrap: wrap; justify-content: center; }
   .footer__pill { font-size: var(--t-sm); min-height: 40px; padding-inline: var(--s-3); }
   .footer__muted { margin-top: var(--s-5); }
   .hero { padding-top: var(--s-5); }
@@ -786,49 +862,16 @@ section { padding-block: var(--s-9); }
   .hero__actions .btn { width: 100%; }
   .btn--lg { min-height: 52px; font-size: var(--t-base); }
   .lead { font-size: var(--t-base); }
-  /* Boletim: folha pautada com rotulo, pontilhado e nota */
-  .proof__row {
-    grid-template-columns: 1fr;
-    gap: 0;
-    padding: var(--s-4) var(--s-5) var(--s-5);
-    margin-block: var(--s-5);
-    border-radius: var(--r-card);
-    background-color: var(--surface);
-    background-image: repeating-linear-gradient(to bottom, transparent 0 39px, var(--line) 39px 40px);
-    box-shadow: var(--shadow-card);
-    transform: rotate(-0.6deg);
-  }
-  .proof__title {
-    display: block;
-    font-family: var(--font-chalk);
-    font-weight: 700;
-    font-size: var(--t-xl);
-    line-height: 40px;
-    color: var(--purple);
-  }
-  .proof__item, .proof__item:nth-child(3), .proof__item:nth-child(4) {
-    flex-direction: row;
-    align-items: baseline;
-    gap: var(--s-3);
-    padding: 0;
-    min-height: 40px;
-    background: transparent;
-    box-shadow: none;
-    transform: none;
-    border-radius: 0;
-  }
-  .proof__key {
-    display: flex;
-    flex: 1;
-    align-items: baseline;
-    gap: var(--s-2);
-    font-weight: 600;
-    line-height: 40px;
-    white-space: nowrap;
-  }
-  .proof__key::after { content: ""; flex: 1; border-bottom: 2px dotted var(--text-muted); opacity: 0.5; transform: translateY(-6px); }
-  .proof__big, .proof__item:nth-child(3) .proof__big { font-size: var(--t-lg); line-height: 40px; color: var(--purple); }
-  .proof__label { display: none; }
+  .notebook { grid-template-columns: 1fr; margin-block: var(--s-5) var(--s-3); }
+  .notebook__tabs { flex-direction: row; order: -1; padding: 0 0 0 var(--s-3); gap: var(--s-1); }
+  .notebook__tab { border-left: 0; border-top: 4px solid var(--tab); border-radius: 12px 12px 0 0; min-height: 44px; padding: 0 var(--s-4); font-size: var(--t-sm); }
+  .notebook__tab[aria-selected="true"] { transform: translateY(2px); }
+  .notebook__pages { border-radius: 0 var(--r-card) var(--r-card) var(--r-card); }
+  .notebook__page { padding: var(--s-5) var(--s-5) var(--s-5) 72px; min-height: 256px; }
+  .notebook__pages, .notebook__page--leave { background-image: linear-gradient(to right, transparent 44px, #E8799E 44px, #E8799E 46px, transparent 46px), repeating-linear-gradient(to bottom, transparent 0 31px, var(--line) 31px 32px); }
+  .notebook__big { font-size: var(--t-3xl); line-height: 56px; }
+  .faq__intro { text-align: center; }
+  .faq__intro .lead { margin-inline: auto; }
   .help .switch { display: grid; width: 100%; }
   .switch { display: grid; grid-template-columns: 1fr; width: 100%; border-radius: var(--r-card); }
   .switch__pill { display: none; }
@@ -873,6 +916,6 @@ section { padding-block: var(--s-9); }
   .terms__row { animation: none !important; width: auto; flex-wrap: wrap; }
   .terms__rows { mask-image: none; -webkit-mask-image: none; }
   .stickybar { transition: none; }
-  .panel--enter, .faq__body { animation: none; }
+  .panel--enter, .faq__body, .notebook__page--leave, .notebook__page--enter, .notebook__tab::after { animation: none !important; }
   .btn, .chip, .postit, .tab::before, .switch__pill, .menu, .burger span { transition: none; }
 }
