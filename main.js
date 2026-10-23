@@ -206,25 +206,20 @@
     });
   }
 
-  /* Barra fixa: some enquanto o hero ou o contato estao na tela */
+  /* Barra fixa: some sempre que qualquer botao de WhatsApp da pagina estiver na tela */
   var bar = document.querySelector(".stickybar");
-  var heroActions = document.querySelector(".hero__actions");
-  var contato = document.getElementById("contato");
   if (bar && "IntersectionObserver" in window) {
-    var visible = { hero: true, contato: false };
-    var updateBar = function () {
-      bar.classList.toggle("stickybar--hidden", visible.hero || visible.contato);
-    };
+    var ctas = Array.prototype.filter.call(document.querySelectorAll('a[href*="wa.me"]'), function (a) { return a !== bar; });
+    var onScreen = new Set();
+    var updateBar = function () { bar.classList.toggle("stickybar--hidden", onScreen.size > 0); };
     var bio = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
-        if (entry.target === heroActions) visible.hero = entry.isIntersecting;
-        if (entry.target === contato) visible.contato = entry.isIntersecting;
+        if (entry.isIntersecting) onScreen.add(entry.target); else onScreen.delete(entry.target);
       });
       updateBar();
-    }, { threshold: 0.1 });
-    if (heroActions) bio.observe(heroActions);
-    if (contato) bio.observe(contato);
-    updateBar();
+    }, { threshold: 0.2 });
+    ctas.forEach(function (a) { bio.observe(a); });
+    bar.classList.add("stickybar--hidden");
   }
 
   /* Aba atual no header */
