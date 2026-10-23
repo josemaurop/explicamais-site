@@ -669,7 +669,7 @@ section { padding-block: var(--s-9); }
   border-radius: var(--r-card);
   transform: translate(12px, 12px) rotate(1.5deg);
 }
-.contact__map img { position: relative; border-radius: var(--r-card); aspect-ratio: 3 / 2; object-fit: cover; }
+.contact__map img, .contact__map iframe { position: relative; display: block; width: 100%; height: auto; border: 0; border-radius: var(--r-card); aspect-ratio: 3 / 2; object-fit: cover; background: var(--surface); }
 
 /* =========================================================
    Rodapé: folha pautada escura
