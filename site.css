@@ -343,8 +343,8 @@ section { padding-block: var(--s-9); }
   box-shadow: var(--shadow-card);
   transform: rotate(-1.2deg);
 }
-.proof__item:nth-child(2) { background: var(--postit-yellow); transform: rotate(0.8deg); }
-.proof__item:nth-child(3) { background: var(--blue-soft); transform: rotate(-0.6deg); }
+.proof__item:nth-child(3) { background: var(--postit-yellow); transform: rotate(0.8deg); }
+.proof__item:nth-child(4) { background: var(--blue-soft); transform: rotate(-0.6deg); }
 .proof__big {
   font-family: var(--font-display);
   font-weight: 700;
@@ -353,21 +353,16 @@ section { padding-block: var(--s-9); }
   color: var(--purple);
   font-variant-numeric: tabular-nums;
 }
-.proof__item:nth-child(2) .proof__big, .proof__item:nth-child(2) .proof__label { color: var(--postit-text); }
+.proof__item:nth-child(3) .proof__big, .proof__item:nth-child(3) .proof__label { color: var(--postit-text); }
 .proof__label { color: var(--text-muted); max-width: 28ch; }
+.proof__key, .proof__title { display: none; }
 
 /* =========================================================
    Como ajudamos: abas de situação
    ========================================================= */
-.help .container {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: end;
-  column-gap: var(--s-8);
-  row-gap: var(--s-7);
-}
-.help__head { margin-bottom: 0; }
-.panels { grid-column: 1 / -1; }
+.help__head { text-align: center; margin-bottom: var(--s-6); }
+.help__head .lead { margin-inline: auto; }
+.help .switch { display: flex; width: max-content; max-width: 100%; margin: 0 auto var(--s-7); }
 
 .switch {
   position: relative;
@@ -764,7 +759,7 @@ section { padding-block: var(--s-9); }
 
 @media (max-width: 767px) {
   section { padding-block: var(--s-8); }
-  body { padding-bottom: 72px; }
+  .footer { padding-bottom: calc(var(--s-9) + 72px); }
   .hero { padding-top: var(--s-5); }
   .hero__grid { gap: var(--s-5); }
   .hero__scene { order: -1; padding: 7% 9% 9% 9%; max-width: none; margin-inline: 0; }
@@ -777,11 +772,50 @@ section { padding-block: var(--s-9); }
   .hero__actions .btn { width: 100%; }
   .btn--lg { min-height: 52px; font-size: var(--t-base); }
   .lead { font-size: var(--t-base); }
-  .proof__row { grid-template-columns: 1fr; gap: var(--s-3); padding-block: var(--s-5); }
-  .proof__item { flex-direction: row; align-items: baseline; gap: var(--s-4); padding: var(--s-4) var(--s-5); }
-  .proof__big { font-size: var(--t-xl); min-width: 5.5ch; }
-  .proof__label { font-size: var(--t-sm); line-height: 1.35; }
-  .help .container { grid-template-columns: 1fr; row-gap: var(--s-5); }
+  /* Boletim: folha pautada com rotulo, pontilhado e nota */
+  .proof__row {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: var(--s-4) var(--s-5) var(--s-5);
+    margin-block: var(--s-5);
+    border-radius: var(--r-card);
+    background-color: var(--surface);
+    background-image: repeating-linear-gradient(to bottom, transparent 0 39px, var(--line) 39px 40px);
+    box-shadow: var(--shadow-card);
+    transform: rotate(-0.6deg);
+  }
+  .proof__title {
+    display: block;
+    font-family: var(--font-chalk);
+    font-weight: 700;
+    font-size: var(--t-xl);
+    line-height: 40px;
+    color: var(--purple);
+  }
+  .proof__item, .proof__item:nth-child(3), .proof__item:nth-child(4) {
+    flex-direction: row;
+    align-items: baseline;
+    gap: var(--s-3);
+    padding: 0;
+    min-height: 40px;
+    background: transparent;
+    box-shadow: none;
+    transform: none;
+    border-radius: 0;
+  }
+  .proof__key {
+    display: flex;
+    flex: 1;
+    align-items: baseline;
+    gap: var(--s-2);
+    font-weight: 600;
+    line-height: 40px;
+    white-space: nowrap;
+  }
+  .proof__key::after { content: ""; flex: 1; border-bottom: 2px dotted var(--text-muted); opacity: 0.5; transform: translateY(-6px); }
+  .proof__big, .proof__item:nth-child(3) .proof__big { font-size: var(--t-lg); line-height: 40px; color: var(--purple); }
+  .proof__label { display: none; }
+  .help .switch { width: 100%; }
   .switch { display: grid; grid-template-columns: 1fr; width: 100%; border-radius: var(--r-card); }
   .switch__pill { display: none; }
   .switch__btn { text-align: left; padding-inline: var(--s-4); }
