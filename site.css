@@ -331,25 +331,43 @@ section { padding-block: var(--s-9); }
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--s-6);
-  padding-block: var(--s-7);
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
+  padding-block: var(--s-6) var(--s-5);
 }
-.proof__item { display: flex; flex-direction: column; gap: var(--s-2); }
+.proof__item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  padding: var(--s-5) var(--s-6);
+  border-radius: var(--r-card);
+  background: var(--purple-soft);
+  box-shadow: var(--shadow-card);
+  transform: rotate(-1.2deg);
+}
+.proof__item:nth-child(2) { background: var(--postit-yellow); transform: rotate(0.8deg); }
+.proof__item:nth-child(3) { background: var(--blue-soft); transform: rotate(-0.6deg); }
 .proof__big {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(var(--t-2xl), 4vw, var(--t-3xl));
+  font-size: clamp(var(--t-2xl), 3.4vw, var(--t-3xl));
   line-height: 1;
   color: var(--purple);
   font-variant-numeric: tabular-nums;
 }
+.proof__item:nth-child(2) .proof__big, .proof__item:nth-child(2) .proof__label { color: var(--postit-text); }
 .proof__label { color: var(--text-muted); max-width: 28ch; }
 
 /* =========================================================
    Como ajudamos: abas de situação
    ========================================================= */
-.help__head { margin-bottom: var(--s-7); }
+.help .container {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  column-gap: var(--s-8);
+  row-gap: var(--s-7);
+}
+.help__head { margin-bottom: 0; }
+.panels { grid-column: 1 / -1; }
 
 .switch {
   position: relative;
@@ -358,7 +376,7 @@ section { padding-block: var(--s-9); }
   padding: var(--s-1);
   background: var(--surface);
   border-radius: var(--r-pill);
-  margin-bottom: var(--s-6);
+  margin-bottom: 0;
   isolation: isolate;
 }
 .switch__btn {
@@ -681,21 +699,29 @@ section { padding-block: var(--s-9); }
   padding-block: var(--s-8) var(--s-9);
   font-size: var(--t-base);
 }
+.footer__top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-6);
+  flex-wrap: wrap;
+  margin-bottom: var(--s-7);
+}
 .footer__big {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(4rem, 15vw, 12rem);
+  font-size: clamp(3rem, 9vw, 7rem);
   line-height: 0.9;
   letter-spacing: -0.05em;
   color: var(--chalk);
-  margin-bottom: var(--s-7);
+  margin: 0;
 }
 .footer__big span { color: var(--postit-yellow); }
 .footer__grid { display: grid; grid-template-columns: 1.4fr 1.2fr 0.8fr 1fr; gap: var(--s-6); padding-top: var(--s-6); border-top: 1px solid var(--ink-line); }
 .footer__col { font-style: normal; line-height: 1.8; }
 .footer__col strong { display: block; color: var(--chalk); font-family: var(--font-display); font-weight: 600; margin-bottom: var(--s-1); }
 .footer__col a { color: var(--chalk); }
-.footer__chalk { margin-top: var(--s-8); font-family: var(--font-chalk); font-size: var(--t-xl); color: var(--chalk); }
+.footer__chalk { margin: 0; font-family: var(--font-chalk); font-weight: 500; font-size: clamp(1.75rem, 3vw, 2.5rem); line-height: 1.1; color: var(--chalk); }
 
 /* =========================================================
    Barra fixa de WhatsApp (celular)
@@ -751,10 +777,11 @@ section { padding-block: var(--s-9); }
   .hero__actions .btn { width: 100%; }
   .btn--lg { min-height: 52px; font-size: var(--t-base); }
   .lead { font-size: var(--t-base); }
-  .proof__row { grid-template-columns: repeat(3, 1fr); gap: var(--s-3); padding-block: var(--s-5); }
-  .proof__big { font-size: var(--t-xl); }
+  .proof__row { grid-template-columns: 1fr; gap: var(--s-3); padding-block: var(--s-5); }
+  .proof__item { flex-direction: row; align-items: baseline; gap: var(--s-4); padding: var(--s-4) var(--s-5); }
+  .proof__big { font-size: var(--t-xl); min-width: 5.5ch; }
   .proof__label { font-size: var(--t-sm); line-height: 1.35; }
-  .help__head { margin-bottom: var(--s-6); }
+  .help .container { grid-template-columns: 1fr; row-gap: var(--s-5); }
   .switch { display: grid; grid-template-columns: 1fr; width: 100%; border-radius: var(--r-card); }
   .switch__pill { display: none; }
   .switch__btn { text-align: left; padding-inline: var(--s-4); }
