@@ -184,6 +184,8 @@ a { color: var(--purple); text-underline-offset: 3px; }
 
 /* Régua única de seção: mesmo respiro, mesmo cabeçalho */
 section { padding-block: var(--s-9); }
+/* Abaixo da dobra, o navegador so calcula layout e pintura quando a secao se aproxima da tela */
+.help, .terms, .about, .board, .faq, .contact, .footer { content-visibility: auto; contain-intrinsic-size: auto 900px; }
 .lead {
   font-size: var(--t-md);
   color: var(--text-muted);
