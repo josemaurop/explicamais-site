@@ -124,7 +124,7 @@
       });
     });
     var current = tabs.filter(function (t) { return t.getAttribute("aria-selected") === "true"; })[0] || tabs[0];
-    placePill(current);
+    requestAnimationFrame(function () { placePill(current); });
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { placePill(current); });
     window.addEventListener("resize", function () {
       var sel = tabs.filter(function (t) { return t.getAttribute("aria-selected") === "true"; })[0];

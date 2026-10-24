@@ -1,3 +1,131 @@
+/* Explica Mais: fontes (self-host), tokens e estilos num arquivo so, para um unico request de CSS. */
+@font-face { font-family: 'Caveat'; font-style: normal; font-weight: 500 700; font-display: swap; src: url(assets/fonts/caveat-var.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Outfit'; font-style: normal; font-weight: 500 700; font-display: swap; src: url(assets/fonts/outfit-var.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Source Sans 3'; font-style: normal; font-weight: 400 600; font-display: swap; src: url(assets/fonts/sourcesans3-var.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
+:root {
+  /* Superficies claras */
+  --bg: #F8F7FC;
+  --surface: #EFEDF9;
+  --text: #15132B;
+  --text-muted: #5E5B7A;
+  --line: #DCD9EC;
+
+  /* Marca: roxo e azul */
+  --purple: #5A3FC8;
+  --purple-strong: #46309F;
+  --purple-soft: #E9E4FA;
+  --blue: #2E6BE6;
+  --blue-strong: #1F54BF;
+  --blue-soft: #DFEAFF;
+  --on-brand: #FBFAFF;
+
+  /* Blocos escuros (sala, quadro) */
+  --ink: #17153A;
+  --ink-2: #221F52;
+  --ink-line: #35317A;
+  --chalk: #F4F2FF;
+  --chalk-muted: #B9B5DC;
+  --board: #1B2E2A;
+  --board-line: #2C4640;
+
+  /* Post-its */
+  --postit-yellow: #FFE882;
+  --postit-pink: #FFB8CC;
+  --postit-blue: #BFDDFF;
+  --postit-green: #C9F2C4;
+  --postit-text: #2A2410;
+
+  --shadow-card: 0 10px 30px rgba(90, 63, 200, 0.10);
+  --shadow-postit: 2px 6px 14px rgba(0, 0, 0, 0.28);
+
+  --font-display: "Outfit", system-ui, sans-serif;
+  --font-text: "Source Sans 3", system-ui, sans-serif;
+  --font-chalk: "Caveat", cursive;
+
+  --t-sm: 0.875rem;
+  --t-base: 1.0625rem;
+  --t-md: 1.1875rem;
+  --t-lg: 1.375rem;
+  --t-xl: 1.75rem;
+  --t-2xl: 2.25rem;
+  --t-3xl: 3rem;
+  --t-4xl: 3.75rem;
+
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 32px;
+  --s-7: 48px;
+  --s-8: 64px;
+  --s-9: 96px;
+  --s-10: 128px;
+
+  --r-card: 16px;
+  --r-pill: 999px;
+  --r-paper: 2px;
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --dur-fast: 160ms;
+  --dur-base: 240ms;
+  --dur-reveal: 600ms;
+
+  --container: 1200px;
+  --gutter: var(--s-5);
+  --nav-h: 72px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #100F26;
+    --surface: #1A1838;
+    --text: #ECEAFF;
+    --text-muted: #A9A6C9;
+    --line: #2C2958;
+    --purple: #A392FF;
+    --purple-strong: #BBAEFF;
+    --purple-soft: #2A2560;
+    --blue: #7FA8FF;
+    --blue-strong: #9DBDFF;
+    --blue-soft: #1C2A55;
+    --on-brand: #100F26;
+    --ink: #0B0A1C;
+    --ink-2: #15132E;
+    --ink-line: #2A2758;
+    --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.4);
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #100F26;
+  --surface: #1A1838;
+  --text: #ECEAFF;
+  --text-muted: #A9A6C9;
+  --line: #2C2958;
+  --purple: #A392FF;
+  --purple-strong: #BBAEFF;
+  --purple-soft: #2A2560;
+  --blue: #7FA8FF;
+  --blue-strong: #9DBDFF;
+  --blue-soft: #1C2A55;
+  --on-brand: #100F26;
+  --ink: #0B0A1C;
+  --ink-2: #15132E;
+  --ink-line: #2A2758;
+  --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+@media (max-width: 767px) {
+  :root {
+    --gutter: var(--s-4);
+    --nav-h: 64px;
+    --t-base: 1rem;
+  }
+}
+
 /* =========================================================
    Base
    ========================================================= */
@@ -80,7 +208,7 @@ section { padding-block: var(--s-9); }
   transition: transform var(--dur-fast) var(--ease-out), background-color var(--dur-fast) ease, border-color var(--dur-fast) ease, box-shadow var(--dur-fast) ease;
 }
 .btn:active { transform: scale(0.97); }
-.btn .ph-fill, .contact__phone .ph-fill, .footer .ph-fill, .stickybar .ph-fill { font-size: 1.25em; margin-right: var(--s-2); vertical-align: -0.15em; }
+.ic { width: 1.25em; height: 1.25em; fill: currentColor; vertical-align: -0.25em; margin-right: var(--s-2); flex: none; }
 .btn--lg { min-height: 56px; padding-inline: var(--s-6); font-size: var(--t-md); }
 .btn--primary { background: var(--purple); color: var(--on-brand); box-shadow: 0 6px 18px rgba(90, 63, 200, 0.28); }
 .btn--ghost { background: transparent; color: var(--text); border-color: var(--line); }
@@ -303,8 +431,8 @@ section { padding-block: var(--s-9); }
 .sticker--s5 { --x: 28%; --y: 95%; --r: -3deg; --depth: 1.0; }
 
 @keyframes float {
-  0%, 100% { margin-top: 0; }
-  50% { margin-top: -6px; }
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -6px; }
 }
 
 /* =========================================================
@@ -514,7 +642,7 @@ section { padding-block: var(--s-9); }
   padding: 0 var(--s-5);
   border: 1px solid var(--ink-line);
   border-radius: var(--r-pill);
-  background: transparent;
+  background: var(--ink-2);
   color: var(--chalk);
   font-family: var(--font-display);
   font-weight: 500;
@@ -535,7 +663,7 @@ section { padding-block: var(--s-9); }
   font-size: var(--t-lg);
 }
 @media (hover: hover) and (pointer: fine) {
-  .chip:hover:not([aria-pressed="true"]) { background: var(--ink-2); border-color: var(--chalk-muted); transform: translateY(-2px); }
+  .chip:hover:not([aria-pressed="true"]) { background: var(--ink-line); border-color: var(--chalk-muted); transform: translateY(-2px); }
 }
 
 @supports (animation-timeline: scroll()) {
@@ -760,7 +888,7 @@ section { padding-block: var(--s-9); }
   border-bottom: 1px solid var(--ink-line);
 }
 .footer__brandrow { display: flex; align-items: center; gap: var(--s-5); }
-.footer__pill--rate .ph-fill { color: var(--postit-yellow); }
+
 .brand--footer .brand__img { height: 56px; }
 .brand--footer .brand__word { color: var(--chalk); font-size: var(--t-xl); }
 .brand--footer .brand__plus { color: var(--postit-yellow); }
@@ -775,7 +903,7 @@ section { padding-block: var(--s-9); }
 .footer__grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: var(--s-6); max-width: 560px; }
 .footer__col { font-style: normal; line-height: 1.7; }
 .footer__col strong { display: block; color: var(--chalk); font-family: var(--font-display); font-weight: 600; margin-bottom: var(--s-1); }
-.footer__col .ph-fill { font-size: 1.1em; margin-right: var(--s-2); vertical-align: -0.12em; }
+.footer__col .ic { width: 1.1em; height: 1.1em; vertical-align: -0.18em; }
 .footer__links { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s-2); }
 .footer__pill {
   display: inline-flex;
@@ -789,7 +917,7 @@ section { padding-block: var(--s-9); }
   font-weight: 600;
   transition: background-color var(--dur-fast) ease, border-color var(--dur-fast) ease, transform var(--dur-fast) var(--ease-out);
 }
-.footer__pill .ph-fill { font-size: 1.25em; margin-right: var(--s-2); color: var(--postit-yellow); }
+.footer__pill .ic { color: var(--postit-yellow); }
 .footer__pill:active { transform: scale(0.97); }
 @media (hover: hover) and (pointer: fine) {
   .footer__pill:hover { background: var(--ink-2); border-color: var(--chalk-muted); }
