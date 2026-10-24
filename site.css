@@ -940,7 +940,9 @@ section { padding-block: var(--s-9); }
   transition: opacity var(--dur-reveal) var(--ease-out), transform var(--dur-reveal) var(--ease-out);
   transition-delay: calc(var(--d, 0) * 90ms);
 }
-.reveal.is-in, .no-js .reveal { opacity: 1; transform: none; }
+.reveal.is-in, .no-js .reveal, .hero .reveal { opacity: 1; transform: none; }
+/* Acima da dobra nada espera o JS: o hero pinta na primeira passagem; so o grifo anima */
+.hero .reveal { transition: none; }
 .postit.reveal { transform: translateY(-20px) rotate(calc(var(--r) * 2)); }
 .postit.reveal.is-in, .no-js .postit.reveal { transform: rotate(var(--r)); }
 
