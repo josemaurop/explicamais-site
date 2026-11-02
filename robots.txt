@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://josemaurop.github.io/explicamais-site/sitemap.xml
+Sitemap: https://explicamaiscg.com.br/sitemap.xml
