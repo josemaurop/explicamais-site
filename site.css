@@ -879,17 +879,19 @@ section { padding-block: var(--s-9); }
   align-items: center;
   min-height: 44px;
   padding: 0 var(--s-4);
-  border: 1px solid var(--ink-line);
+  border: 1px solid var(--purple);
   border-radius: var(--r-pill);
+  background: var(--purple);
   color: var(--chalk);
   text-decoration: none;
   font-weight: 600;
   transition: background-color var(--dur-fast) ease, border-color var(--dur-fast) ease, transform var(--dur-fast) var(--ease-out);
 }
+/* Fundo solido: no celular nao ha hover, e a pilula so de contorno sumia no fundo escuro */
 .footer__pill .ic { color: var(--postit-yellow); }
 .footer__pill:active { transform: scale(0.97); }
 @media (hover: hover) and (pointer: fine) {
-  .footer__pill:hover { background: var(--ink-2); border-color: var(--chalk-muted); }
+  .footer__pill:hover { background: var(--purple-strong); border-color: var(--chalk-muted); }
 }
 .footer__muted { margin-top: var(--s-6); font-size: var(--t-sm); color: var(--chalk-muted); }
 .footer__muted a { color: var(--chalk-muted); }
