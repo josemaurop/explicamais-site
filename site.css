@@ -9,6 +9,8 @@
 @font-face { font-family: 'Caveat Fallback'; src: local('Arial Bold'), local('Arial'); size-adjust: 68.16%; ascent-override: 140.85%; descent-override: 44.02%; line-gap-override: 0.00%; }
 
 :root {
+  color-scheme: only light;
+
   /* Superficies claras */
   --bg: #F8F7FC;
   --surface: #EFEDF9;
