@@ -1,0 +1,9 @@
+{
+  "name": "explicamais-site-ci",
+  "private": true,
+  "description": "Ferramentas do job ci. Versoes travadas no package-lock.json; instalar com npm ci.",
+  "type": "module",
+  "devDependencies": {
+    "html-validate": "11.16.4"
+  }
+}
