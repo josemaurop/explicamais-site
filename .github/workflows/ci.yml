@@ -1,0 +1,34 @@
+# Gate minimo do site: HTML valido e links internos/assets existentes.
+# O check `ci` e obrigatorio na protecao da main (junto com auditoria, verificacao e aceite).
+# Sem segredo. Actions fixadas por SHA de commit (tag no comentario).
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    name: ci
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+
+      # Regras e excecoes documentadas em .github/ci/htmlvalidate.cjs. Versao exata do pacote.
+      - name: HTML valido
+        run: npx --yes html-validate@11.16.4 --config .github/ci/htmlvalidate.cjs .
+
+      # Offline: confere so arquivos do repo, nao acessa URL externa.
+      - name: Links internos e assets
+        run: node .github/ci/check-links.mjs .
