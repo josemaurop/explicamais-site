@@ -1,4 +1,5 @@
-// Config do html-validate usada pelo job `ci` (.github/workflows/ci.yml).
+// Config do html-validate usada pelo job `ci` (.github/workflows/ci.yml), carregada por validate-html.mjs
+// como unica config (root, sem cascata). `.htmlvalidate*` fora de .github/ e diretiva inline reprovam o ci.
 // Base: preset "recommended". Excecoes abaixo, cada uma com o motivo.
 // Afrouxar regra aqui mexe em .github/**, entao passa pelo Jose (o lab-pr merge recusa).
 module.exports = {

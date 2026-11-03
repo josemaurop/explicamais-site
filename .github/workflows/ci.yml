@@ -25,9 +25,15 @@ jobs:
         with:
           node-version: 24
 
-      # Regras e excecoes documentadas em .github/ci/htmlvalidate.cjs. Versao exata do pacote.
+      # Dependencias travadas (com hash) em .github/ci/package-lock.json, sem scripts de instalacao.
+      # Para atualizar: em .github/ci, `npm install --ignore-scripts --before=<data de 2 semanas atras>`.
+      - name: Instalar ferramentas
+        run: npm ci --prefix .github/ci --ignore-scripts --no-audit --no-fund
+
+      # So a config de .github/ci/htmlvalidate.cjs vale (sem cascata de `.htmlvalidate*` do repo);
+      # reprova `.htmlvalidate*` fora de .github/ e diretiva inline do html-validate.
       - name: HTML valido
-        run: npx --yes html-validate@11.16.4 --config .github/ci/htmlvalidate.cjs .
+        run: node .github/ci/validate-html.mjs .
 
       # Offline: confere so arquivos do repo, nao acessa URL externa.
       - name: Links internos e assets
